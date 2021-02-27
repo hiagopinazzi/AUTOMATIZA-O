@@ -1,0 +1,29 @@
+
+const int pinoSensor = A0; //PINO UTILIZADO PELO SENSOR
+int pinoRele = 12; //PINO UTILIZADO PELO RELÉ
+void setup(){
+ Serial.begin(9600); //INICIALIZA A SERIAL
+ //Define pinos para o rele como saida
+ pinMode(pinoRele, OUTPUT); 
+ delay(2000); //INTERVALO DE 2 SEGUNDOS
+}
+void loop(){  
+ 
+ if(analogRead(pinoSensor) >= 800)
+ {
+  //delay(300000);//5 minutos
+  digitalWrite(pinoRele, LOW);  //Liga rele 1
+  Serial.print("UMIDADE RUIM ACIONAMENTO AUTOMATICO =>");
+  Serial.print(analogRead(pinoSensor));
+  Serial.print("\n");
+  delay(30000);//1 minuto
+ }
+ else
+ {
+   digitalWrite(pinoRele, HIGH); //Desliga rele 1
+   Serial.print("BOA UMIDADE =>");
+   Serial.print(analogRead(pinoSensor));
+   Serial.print("\n");
+ }
+ delay(9000);
+}
